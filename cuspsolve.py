@@ -135,6 +135,6 @@ if __name__ == '__main__':
 
     ratio = dt1/dt2
     if ratio > 1:
-        print "CUDA is %s times faster tna CPU." %ratio
+        print "CUDA is %s times faster than CPU." %ratio
     else:
-        print "CUDA is %s times slower tna CPU." %(1./ratio)
+        print "CUDA is %s times slower than CPU." %(1./ratio)
