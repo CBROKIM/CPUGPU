@@ -106,7 +106,7 @@ def cuspsolve(A, b):
     assert(status == 0)
 
     # Return result
-    return dx.get()
+    return x
 
 
 # Test
