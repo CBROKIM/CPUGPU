@@ -118,10 +118,14 @@ if __name__ == '__main__':
 
     # Timing comparison
     from scipy.sparse.linalg import spsolve
-    from scipy.sparse import csr_matrix
+    from scipy.sparse import coo_matrix
     import time
-    A = csr_matrix(np.diag(np.arange(1, 501)), dtype=float)
-    b = np.ones(500)
+    n = 100000
+    vals = np.arange(1, n+1)
+    i = j = np.arange(n)
+    A = coo_matrix((vals, (i, j)), shape = (n, n))
+    A = A.tocsr()
+    b = np.ones(n)
 
     t0 = time.time()
     x = spsolve(A, b)
@@ -135,6 +139,6 @@ if __name__ == '__main__':
 
     ratio = dt1/dt2
     if ratio > 1:
-        print "CUDA is %s times faster than CPU." %ratio
+        print "CUDA is %s times faster tna CPU." %ratio
     else:
-        print "CUDA is %s times slower than CPU." %(1./ratio)
+        print "CUDA is %s times slower tna CPU." %(1./ratio)
