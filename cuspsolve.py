@@ -117,14 +117,16 @@ if __name__ == '__main__':
     np.testing.assert_almost_equal(x, np.array([1. , 0.5, 0.33333333, 0.25]))
 
     # Timing comparison
+    from scipy.sparse import rand
     from scipy.sparse.linalg import spsolve
     from scipy.sparse import coo_matrix
     import time
-    n = 100000
-    vals = np.arange(1, n+1)
+    n = 10000
     i = j = np.arange(n)
-    A = coo_matrix((vals, (i, j)), shape = (n, n))
+    diag = np.ones(n)
+    A = rand(n, n, density=0.001)
     A = A.tocsr()
+    A[i, j] = diag
     b = np.ones(n)
 
     t0 = time.time()
@@ -139,6 +141,6 @@ if __name__ == '__main__':
 
     ratio = dt1/dt2
     if ratio > 1:
-        print "CUDA is %s times faster tna CPU." %ratio
+        print "CUDA is %s times faster than CPU." %ratio
     else:
-        print "CUDA is %s times slower tna CPU." %(1./ratio)
+        print "CUDA is %s times slower than CPU." %(1./ratio)
